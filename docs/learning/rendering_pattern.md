@@ -20,10 +20,10 @@ UX measurement: Core Web Vitals (CWV). Optimising CWV optimise user experience a
 
 ## Terminology
 
-- Rendering
+- Rendering: the process of converting React component (JS code) into HTML that display in the browser
 - Server-side rendering: rendering an app on the server to send HTML, rather than JS to the client
 - Client-side rendering: rendering an app in a browser, using JS to modify the DOM
-- hydration/ rehydration: static HTML gets 'hydrated' by JS functionality (JS attaches event listeners and makes components interactive)
+- hydration/ rehydration (used interchangeably): static HTML gets 'hydrated' by JS functionality (JS attaches event listeners and makes components interactive)
 - Prerendering: running a client-side application at build time to generate HTML files
 
 ## Rendering patterns Overview
@@ -67,3 +67,7 @@ SSR generate the HTML for every request. Most suitable for pages containing high
 ## Conclusion
 
 On-demand ISR for the main dashboard page (on-demand for any data change - new stocks added to the list or removed from the list). UI: clicking on the refresh button will run the API to generate a new stock list, check if any changes from the last one. If so, update the list & frontend listen to such webhook event.
+
+CSR: rendering happens in the browser
+SSR: rendering happens on the server - send complete HTML with data to the browser. Data is also fetch on the server
+SSR: rendering happens at build time. HTML is pre-generated when you build the app. No rendering work needed at runtime
