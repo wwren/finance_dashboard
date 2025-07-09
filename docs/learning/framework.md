@@ -31,3 +31,9 @@
 - data fetching happens at build time & also run time
   - build time to use useStaticQuery
   - run time to use fetch
+- rendering options:
+  - static generation: pages are generated at build server & loaded to CDN. build server is gone after build
+    - also support incremental builds so subsequent builds only rebuild the parts of site that changes
+  - deferred static generation: defer building certain pages until the first time a user requests it => site's build time is optimised
+    - build server needs to keep running after the intial build
+  - server-side rendering: page built on the server on each page request - better SEO
