@@ -6,13 +6,30 @@
 
 ## Remix
 
+- focus on server side rendering & Remix app needs to run on a server that supports nodejs runtime
+  - can be deployed to Node.js server like Express
+  - or serverless functions like AWS Lambda or Cloudflare Workers ir Deno Deploy
+- route loaders: run on the server and provide data to the component on GET requests
+- default export (component): component renders when a route matches the URL. It runs both on the server and the client
+- actions: only run on the server and handle POST, PUT, PATCH, and DELETE. They can also provide data to the component
+- data flow
+  - route loaders provide data to the UI
+  - forms post data to route actions that updte persistent state
+  - loader data on the page is automaticlaly revalidated
+- server vs client code execution
+  - remix runs app on the server as well as in the browser. But not all code run in both places
+  - during build step, compiler creates a server build and a client build: server build bundles everything into a single module. Client build splits the app up into multiple bundles to optimise loading & removes server code from the bundles
+  - action, headers, loader are removed from client build
+- performance: using progressive enhancement technique (focus on web content first, allowing people to access the basic content and functionality of a web page, whist users with additional browser features/ faster internet access receive enhanced version later)
+  - HTML and JS and Data load in parallet (first byte is when JS first load)
+
 ## Astro
 
-- Island architecture aka partial/ selective hydration
+- island architecture aka partial/ selective hydration
   - client island: interactive JS UI component hydrated separately from the rest of the page
   - server island: dynamic UI component that is server rendered
 - support multiple UI frameworks: React, Svelte, Vue...
-- Benefits: performance
+- benefits: performance
   - JS load is smaller
   - parallel loading: low-priority island doesn't block the high-priority island. Two load in parallel and hydrate in isolation
 
