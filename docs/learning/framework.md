@@ -1,8 +1,17 @@
 ## Nextjs
 
-- Good with various rendering patterns
-- Routing is based on file system
+- good with various rendering patterns
+- routing is based on file system
 - API routes
+- framework that supports client and server components
+  - environment: client & server
+  - network boundary
+  - where to place the network boundary in the compoenent tree depends on the app. For example: fetch data and render a user's posts on the server (using Server Components), then render the interactive LinkButton for each post on the client (using Client Components)
+  - server module graph/ tree contains server compoenents
+  - client module graph/ tree contains client components
+  - React Server Component Payload (RSC)
+    - rendered result of Server Components
+    - Placeholders for where Client Components should be rendered and references to their JS files: React uses this info to consolidate the Server and Client Componenets and update the DOM on the client
 
 ## Remix
 
