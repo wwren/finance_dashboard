@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finance Dashboard Frontend
 
-## Getting Started
+A modern, responsive finance dashboard built with Next.js 15, TypeScript, and TanStack Table for displaying S&P 500 stock data with advanced sorting and filtering capabilities.
 
-First, run the development server:
+## 📄 Pages
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Dashboard**: Main index page with S&P 500 stock table
+- **My List**: Personal stock watchlist page
+
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15.4.4 (App Router)
+- **Language**: TypeScript 5
+- **Styling**: CSS Modules
+- **Table Library**: TanStack Table (React Table v8)
+- **Icons**: React Icons (FontAwesome)
+- **Fonts**: Geist (Sans & Mono)
+- **Build Tool**: Turbopack (dev mode)
+
+## 📁 Project Structure
+
+```
+frontend/
+├── src/
+│   ├── app/
+│   │   ├── (dashboard)/          # Main index page and my-list page, shared layout
+│   │   ├── components/           # Shared components
+│   │   ├── data/                 # Data files
+│   │   ├── globals.css           # Global styles
+│   │   └── layout.tsx            # Root layout
+│   └── lib/                      # Utility functions
+├── public/                        # Static assets
+├── package.json                   # Dependencies
+└── tsconfig.json                 # TypeScript config
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js 24+ 
+- npm (Node Package Manager)
 
-## Learn More
+### Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd finance_dashboard/frontend
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Run development server**
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📊 Available Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev          # Start development server with Turbopack
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+```
+
+## 🎨 Styling
+
+- **CSS Modules**: Scoped styling for components
+- **Responsive Design**: Mobile-first approach
+- **Color Scheme**: Professional dark/light theme
+- **Typography**: Geist font family for modern readability
+
+## 🔧 Configuration
+
+### TypeScript
+- Strict mode enabled
+- Path aliases configured (`@/` points to `src/`)
+- Next.js 15 optimizations
+
+### Next.js
+- App Router architecture
+- Turbopack for faster development
+- Optimized font loading
+- Static generation support
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Built with ❤️ using Next.js and modern web technologies

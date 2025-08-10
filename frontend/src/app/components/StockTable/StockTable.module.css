@@ -1,0 +1,145 @@
+.tableContainer {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.tableHeader {
+  background-color: #f8f9fa;
+  border-bottom: 0.0625rem solid #dee2e6;
+}
+
+.headerCell {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+  position: relative;
+}
+
+.headerCell:hover {
+  background-color: #e9ecef;
+}
+
+.headerCell.sortable {
+  padding-right: 2rem;
+}
+
+.sortIcon {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.sortIcon.asc {
+  color: #007bff;
+}
+
+.sortIcon.desc {
+  color: #007bff;
+}
+
+.tableBody {
+  background: white;
+}
+
+.tableRow {
+  border-bottom: 0.0625rem solid #f1f3f4;
+  transition: background-color 0.15s ease;
+}
+
+.tableRow:hover {
+  background-color: #f8f9fa;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableCell {
+  padding: 0.75rem 1rem;
+  color: #212529;
+  vertical-align: middle;
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  cursor: pointer;
+}
+
+.symbolCell {
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+.companyName {
+  font-weight: 500;
+  color: #212529;
+}
+
+.weight {
+  color: #6c757d;
+}
+
+.sector {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+  min-width: 4rem;
+  display: inline-block;
+}
+
+.sectorExcellent {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.sectorVeryGood {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.sectorGood {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.subIndustry {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.dateAdded {
+  color: #6c757d;
+}
+
+.price {
+  font-weight: 600;
+  color: #212529;
+  text-align: right;
+}
+
+.noData {
+  padding: 2rem;
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+}

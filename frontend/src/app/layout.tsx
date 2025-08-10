@@ -24,16 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <head>
-        <script src="https://kit.fontawesome.com/8582226c7f.js" crossOrigin="anonymous"></script>
-      </head>
-      <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          {children}
-          <Footer />
-        </body>
-      </html>
-    </>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        {children}
+        <Footer />
+      </body>
+    </html>
   );
 }
