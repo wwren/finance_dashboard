@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import { StockTable } from "@/components/StockTable/StockTable";
-import stockData from "@/data/stockData.json";
+import stockData from "@/app/data/stockData.json";
 
 export default function Dashboard() {
   return (
