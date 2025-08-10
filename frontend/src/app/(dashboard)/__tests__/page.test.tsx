@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import Dashboard from '../page'
+import Dashboard from '@/app/(dashboard)/page'
 
 // Mock the stock data
 jest.mock('@/data/stockData.json', () => [
@@ -25,56 +25,69 @@ jest.mock('@/data/stockData.json', () => [
   }
 ], { virtual: true })
 
+const setUpComponent = () => {
+  render(<Dashboard />)
+  
+  return {
+    mainHeading: screen.getByRole('heading', { level: 1 }),
+    sp500Text: screen.getByText('S&P 500'),
+    stockTable: screen.getByTestId('stock-table'),
+    stockTableData: screen.getByTestId('stock-table-data'),
+    stock1: screen.getByTestId('stock-1'),
+    stock2: screen.getByTestId('stock-2'),
+    msftText: screen.getByText('MSFT - Microsoft'),
+    aaplText: screen.getByText('AAPL - Apple'),
+    main: screen.getByRole('main'),
+    header: screen.getByText('S&P 500').closest('div'),
+    pageDiv: screen.getByText('S&P 500').closest('.page'),
+    mainElement: screen.getByRole('main')
+  }
+}
+
 describe('Dashboard Page', () => {
   it('renders the main heading', () => {
-    render(<Dashboard />)
+    const { mainHeading, sp500Text } = setUpComponent()
     
-    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
-    expect(screen.getByText('S&P 500')).toBeInTheDocument()
+    expect(mainHeading).toBeInTheDocument()
+    expect(sp500Text).toBeInTheDocument()
   })
 
   it('renders the StockTable component', () => {
-    render(<Dashboard />)
+    const { stockTable } = setUpComponent()
     
-    expect(screen.getByTestId('stock-table')).toBeInTheDocument()
+    expect(stockTable).toBeInTheDocument()
   })
 
   it('passes stock data to StockTable', () => {
-    render(<Dashboard />)
+    const { stockTableData, stock1, stock2 } = setUpComponent()
     
-    expect(screen.getByTestId('stock-table-data')).toBeInTheDocument()
-    expect(screen.getByTestId('stock-1')).toBeInTheDocument()
-    expect(screen.getByTestId('stock-2')).toBeInTheDocument()
+    expect(stockTableData).toBeInTheDocument()
+    expect(stock1).toBeInTheDocument()
+    expect(stock2).toBeInTheDocument()
   })
 
   it('displays correct stock information', () => {
-    render(<Dashboard />)
+    const { msftText, aaplText } = setUpComponent()
     
-    expect(screen.getByText('MSFT - Microsoft')).toBeInTheDocument()
-    expect(screen.getByText('AAPL - Apple')).toBeInTheDocument()
+    expect(msftText).toBeInTheDocument()
+    expect(aaplText).toBeInTheDocument()
   })
 
   it('has correct page structure', () => {
-    render(<Dashboard />)
+    const { main, header } = setUpComponent()
     
-    const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()
-    
-    const header = screen.getByText('S&P 500').closest('div')
     expect(header).toHaveClass('header')
   })
 
   it('renders without crashing', () => {
-    expect(() => render(<Dashboard />)).not.toThrow()
+    expect(() => setUpComponent()).not.toThrow()
   })
 
   it('has correct CSS classes applied', () => {
-    render(<Dashboard />)
+    const { pageDiv, mainElement } = setUpComponent()
     
-    const pageDiv = screen.getByText('S&P 500').closest('.page')
     expect(pageDiv).toBeInTheDocument()
-    
-    const mainElement = screen.getByRole('main')
     expect(mainElement).toHaveClass('main')
   })
 })

@@ -1,0 +1,119 @@
+# Testing Rules
+
+## Test Structure and Best Practices
+
+### 1. Component Test Setup
+- Use `setUpComponent()` function to render components
+- Function should return an object with all testable elements
+- Destructure only the keys needed for each specific test
+
+### 2. setUpComponent() Function Pattern
+```typescript
+const setUpComponent = () => {
+  render(<Component />)
+  
+  return {
+    // Return all testable elements as key-value pairs
+    elementName: screen.getByRole('role', { name: /text/i }),
+    button: screen.getByRole('button', { name: /Button Text/i }),
+    input: screen.getByRole('textbox', { name: /Input Label/i }),
+    link: screen.getByRole('link', { name: /Link Text/i }),
+    image: screen.getByRole('img', { hidden: true }),
+    container: screen.getByRole('main'),
+    text: screen.getByText(/Text Content/i)
+  }
+}
+```
+
+### 3. Test Structure
+```typescript
+describe('ComponentName', () => {
+  it('should render specific element', () => {
+    // Destructure only what you need for this test
+    const { elementName } = setUpComponent()
+    
+    expect(elementName).toBeInTheDocument()
+  })
+
+  it('should have correct attributes', () => {
+    const { button } = setUpComponent()
+    
+    expect(button).toHaveAttribute('type', 'submit')
+    expect(button).toHaveClass('primary-button')
+  })
+})
+```
+
+### 4. Element Selection Best Practices
+- **By Role**: `screen.getByRole('button', { name: /Button Text/i })`
+- **By Text**: `screen.getByText(/Text Content/i)`
+- **By Label**: `screen.getByLabelText(/Label Text/i)`
+- **By Test ID**: `screen.getByTestId('unique-id')` (use sparingly)
+- **Hidden Elements**: `screen.getByRole('img', { hidden: true })`
+
+### 5. Test Naming Conventions
+- Use descriptive test names that explain the expected behavior
+- Follow the pattern: "should [expected behavior]"
+- Examples:
+  - `it('should render without crashing', () => {})`
+  - `it('should display correct user information', () => {})`
+  - `it('should handle form submission correctly', () => {})`
+
+### 6. Assertion Patterns
+```typescript
+// Element presence
+expect(element).toBeInTheDocument()
+
+// Attributes
+expect(element).toHaveAttribute('href', 'https://example.com')
+expect(element).toHaveAttribute('target', '_blank')
+
+// Classes
+expect(element).toHaveClass('active', 'highlighted')
+
+// Text content
+expect(element).toHaveTextContent('Expected Text')
+expect(element).toHaveTextContent(/regex pattern/i)
+
+// Function calls
+expect(mockFunction).toHaveBeenCalledWith(expectedArgs)
+expect(mockFunction).toHaveBeenCalledTimes(1)
+```
+
+### 7. Benefits of setUpComponent() Pattern
+- **Reusability**: Same setup for multiple tests
+- **Maintainability**: Changes to component structure only need updates in one place
+- **Readability**: Clear what elements are available for testing
+- **Consistency**: Uniform approach across all component tests
+- **Efficiency**: Destructure only what's needed for each test
+
+### 8. Example Implementation
+```typescript
+// Footer.test.tsx
+const setUpComponent = () => {
+  render(<Footer />)
+  
+  return {
+    githubLink: screen.getByRole('link', { name: /GitHub/i }),
+    linkedinLink: screen.getByRole('link', { name: /LinkedIn/i }),
+    footer: screen.getByRole('contentinfo'),
+    copyrightText: screen.getByText(/Copyright/i)
+  }
+}
+
+describe('Footer', () => {
+  it('renders copyright information', () => {
+    const { copyrightText } = setUpComponent()
+    expect(copyrightText).toBeInTheDocument()
+  })
+
+  it('renders GitHub link', () => {
+    const { githubLink } = setUpComponent()
+    expect(githubLink).toHaveAttribute('href', 'https://github.com/...')
+  })
+})
+```
+description:
+globs:
+alwaysApply: false
+---

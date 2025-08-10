@@ -1,44 +1,50 @@
 import { render, screen } from '@testing-library/react'
-import MyDashboard from '../page'
+import MyDashboard from '@/app/(dashboard)/my-list/page'
+
+const setUpComponent = () => {
+  render(<MyDashboard />)
+  
+  return {
+    mainHeading: screen.getByRole('heading', { level: 1 }),
+    myDashboardText: screen.getByText('My Dashboard'),
+    container: screen.getByText('My Dashboard').closest('div'),
+    allText: screen.getAllByText(/./)
+  }
+}
 
 describe('My Dashboard Page', () => {
   it('renders the main heading', () => {
-    render(<MyDashboard />)
+    const { mainHeading, myDashboardText } = setUpComponent()
     
-    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
-    expect(screen.getByText('My Dashboard')).toBeInTheDocument()
+    expect(mainHeading).toBeInTheDocument()
+    expect(myDashboardText).toBeInTheDocument()
   })
 
   it('has correct page structure', () => {
-    render(<MyDashboard />)
+    const { mainHeading, container } = setUpComponent()
     
-    const heading = screen.getByRole('heading', { level: 1 })
-    expect(heading).toBeInTheDocument()
-    
-    const container = heading.closest('div')
+    expect(mainHeading).toBeInTheDocument()
     expect(container).toBeInTheDocument()
   })
 
   it('renders without crashing', () => {
-    expect(() => render(<MyDashboard />)).not.toThrow()
+    expect(() => setUpComponent()).not.toThrow()
   })
 
   it('has minimal content as expected', () => {
-    render(<MyDashboard />)
+    const { myDashboardText, allText } = setUpComponent()
     
     // Should only have the heading
-    expect(screen.getByText('My Dashboard')).toBeInTheDocument()
+    expect(myDashboardText).toBeInTheDocument()
     
     // Should not have any other content
-    const allText = screen.getAllByText(/./)
     expect(allText).toHaveLength(1)
   })
 
   it('is accessible with proper heading hierarchy', () => {
-    render(<MyDashboard />)
+    const { mainHeading } = setUpComponent()
     
-    const heading = screen.getByRole('heading', { level: 1 })
-    expect(heading).toBeInTheDocument()
-    expect(heading.textContent).toBe('My Dashboard')
+    expect(mainHeading).toBeInTheDocument()
+    expect(mainHeading.textContent).toBe('My Dashboard')
   })
 })

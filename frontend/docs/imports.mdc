@@ -1,0 +1,68 @@
+# Import Rules
+
+## File Import Guidelines
+
+### 1. Use Absolute Paths (as defined in tsconfig.json)
+- **Base URL**: `src/app/`
+- **Path Aliases**:
+  - `@/*` → `./src/app/*`
+  - `@/public/*` → `./public/*`
+  - `@/types/*` → `./src/types/*`
+
+### 2. ES6 Module Import Syntax
+- Use named imports: `import { Component } from '@/components/Component'`
+- Use default imports: `import Component from '@/components/Component'`
+- Use relative imports only for closely related files in the same directory
+
+### Examples
+
+#### ✅ Correct - Absolute Paths
+```typescript
+// Component imports
+import { Footer } from '@/components/Footer/Footer'
+import { StockTable } from '@/components/StockTable/StockTable'
+
+// Type imports
+import { StockData } from '@/types/stock'
+
+// Public assets
+import logo from '@/public/logo.png'
+```
+
+#### ✅ Correct - ES6 Module Syntax
+```typescript
+// Named imports
+import { useState, useEffect } from 'react'
+import { render, screen } from '@testing-library/react'
+
+// Default imports
+import React from 'react'
+import NextImage from 'next/image'
+
+// Mixed imports
+import React, { useState, useEffect } from 'react'
+```
+
+#### ❌ Incorrect - Relative Paths (when absolute available)
+```typescript
+// Don't use relative paths when absolute paths are available
+import { Footer } from '../../../components/Footer/Footer'
+import { StockTable } from '../../components/StockTable/StockTable'
+```
+
+#### ❌ Incorrect - CommonJS Syntax
+```typescript
+// Don't use require()
+const React = require('react')
+const { useState } = require('react')
+```
+
+### Benefits
+- Cleaner, more readable imports
+- Easier to move files without breaking imports
+- Consistent import structure across the project
+- Better IDE support and autocomplete
+description:
+globs:
+alwaysApply: false
+---

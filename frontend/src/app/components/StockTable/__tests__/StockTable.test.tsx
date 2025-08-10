@@ -78,27 +78,39 @@ describe('StockTable', () => {
   })
 
   it('renders stock data correctly', () => {
-    render(<StockTable data={mockStockData} />)
+    const { 
+      msftSymbol, 
+      msftCompany, 
+      msftWeight, 
+      msftSector, 
+      msftSubIndustry, 
+      msftPrice,
+      aaplSymbol,
+      aaplCompany,
+      aaplWeight,
+      aaplSector,
+      aaplSubIndustry,
+      aaplPrice
+    } = setUpComponent()
     
-    expect(screen.getByText('MSFT')).toBeInTheDocument()
-    expect(screen.getByText('Microsoft')).toBeInTheDocument()
-    expect(screen.getByText('6.62%')).toBeInTheDocument()
-    expect(screen.getByText('Excellent')).toBeInTheDocument()
-    expect(screen.getByText('75%')).toBeInTheDocument()
-    expect(screen.getByText('$1,799')).toBeInTheDocument()
+    expect(msftSymbol).toBeInTheDocument()
+    expect(msftCompany).toBeInTheDocument()
+    expect(msftWeight).toBeInTheDocument()
+    expect(msftSector).toBeInTheDocument()
+    expect(msftSubIndustry).toBeInTheDocument()
+    expect(msftPrice).toBeInTheDocument()
     
-    expect(screen.getByText('AAPL')).toBeInTheDocument()
-    expect(screen.getByText('Apple')).toBeInTheDocument()
-    expect(screen.getByText('N/A')).toBeInTheDocument()
-    expect(screen.getByText('Very Good')).toBeInTheDocument()
-    expect(screen.getByText('60%')).toBeInTheDocument()
-    expect(screen.getByText('$449')).toBeInTheDocument()
+    expect(aaplSymbol).toBeInTheDocument()
+    expect(aaplCompany).toBeInTheDocument()
+    expect(aaplWeight).toBeInTheDocument()
+    expect(aaplSector).toBeInTheDocument()
+    expect(aaplSubIndustry).toBeInTheDocument()
+    expect(aaplPrice).toBeInTheDocument()
   })
 
   it('renders checkboxes for row selection', () => {
-    render(<StockTable data={mockStockData} />)
+    const { checkboxes } = setUpComponent()
     
-    const checkboxes = screen.getAllByRole('checkbox')
     expect(checkboxes).toHaveLength(mockStockData.length)
     
     checkboxes.forEach(checkbox => {
@@ -108,9 +120,9 @@ describe('StockTable', () => {
 
   it('handles row selection correctly', async () => {
     const user = userEvent.setup()
-    render(<StockTable data={mockStockData} />)
+    const { checkboxes } = setUpComponent()
     
-    const firstCheckbox = screen.getAllByRole('checkbox')[0]
+    const firstCheckbox = checkboxes[0]
     await user.click(firstCheckbox)
     
     expect(firstCheckbox).toBeChecked()
@@ -118,9 +130,8 @@ describe('StockTable', () => {
 
   it('handles sorting correctly', async () => {
     const user = userEvent.setup()
-    render(<StockTable data={mockStockData} />)
+    const { symbolHeader } = setUpComponent()
     
-    const symbolHeader = screen.getByText('Symbol')
     await user.click(symbolHeader)
     
     // Check if sort icon appears
@@ -128,7 +139,7 @@ describe('StockTable', () => {
   })
 
   it('displays correct date format', () => {
-    render(<StockTable data={mockStockData} />)
+    setUpComponent()
     
     // The date should be formatted according to locale
     const dateElement = screen.getByText(/6\/1\/2024/)
@@ -136,52 +147,47 @@ describe('StockTable', () => {
   })
 
   it('handles null weight values correctly', () => {
-    render(<StockTable data={mockStockData} />)
+    const { aaplWeight } = setUpComponent()
     
-    expect(screen.getByText('N/A')).toBeInTheDocument()
+    expect(aaplWeight).toBeInTheDocument()
   })
 
   it('applies correct CSS classes for sector ratings', () => {
-    render(<StockTable data={mockStockData} />)
+    const { msftSector, aaplSector } = setUpComponent()
     
-    const excellentSector = screen.getByText('Excellent')
-    const veryGoodSector = screen.getByText('Very Good')
-    
-    expect(excellentSector).toHaveClass('sectorExcellent')
-    expect(veryGoodSector).toHaveClass('sectorVeryGood')
+    expect(msftSector).toHaveClass('sectorExcellent')
+    expect(aaplSector).toHaveClass('sectorVeryGood')
   })
 
   it('renders no data message when data is empty', () => {
-    render(<StockTable data={[]} />)
+    const { noDataMessage } = setUpComponent([])
     
-    expect(screen.getByText('No data available')).toBeInTheDocument()
+    expect(noDataMessage).toBeInTheDocument()
   })
 
   it('renders no data message when data is null', () => {
-    render(<StockTable data={null as any} />)
+    const { noDataMessage } = setUpComponent(null as any)
     
-    expect(screen.getByText('No data available')).toBeInTheDocument()
+    expect(noDataMessage).toBeInTheDocument()
   })
 
   it('renders table with correct structure', () => {
-    render(<StockTable data={mockStockData} />)
+    const { table, rows } = setUpComponent()
     
-    const table = screen.getByRole('table')
     expect(table).toBeInTheDocument()
     
-    const rows = screen.getAllByRole('row')
     // Header row + 2 data rows
     expect(rows).toHaveLength(3)
   })
 
   it('handles price formatting correctly', () => {
-    render(<StockTable data={mockStockData} />)
+    const { msftPrice, aaplPrice } = setUpComponent()
     
-    expect(screen.getByText('$1,799')).toBeInTheDocument()
-    expect(screen.getByText('$449')).toBeInTheDocument()
+    expect(msftPrice).toBeInTheDocument()
+    expect(aaplPrice).toBeInTheDocument()
   })
 
   it('renders without crashing', () => {
-    expect(() => render(<StockTable data={mockStockData} />)).not.toThrow()
+    expect(() => setUpComponent()).not.toThrow()
   })
 })

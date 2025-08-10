@@ -1,0 +1,37 @@
+# Dependency Management Rules
+
+## Adding Dependencies
+
+### Version Management
+1. **Always use the latest version** when adding new dependencies
+2. **Fix to exact version** - remove caret (^) and tilde (~) from version numbers
+3. **Example**: Use `"react": "18.2.0"` instead of `"react": "^18.2.0"` or `"react": "~18.2.0"`
+
+### Rationale
+- Prevents unexpected breaking changes from minor/patch updates
+- Ensures consistent builds across different environments
+- Makes dependency updates intentional and controlled
+
+### Commands
+```bash
+# Install latest version
+npm install package-name
+
+# Fix to exact version (remove ^ or ~)
+npm install package-name@exact-version
+```
+
+### Package.json Example
+```json
+{
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "next": "14.0.0"
+  }
+}
+```
+description:
+globs:
+alwaysApply: false
+---
